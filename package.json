@@ -1,0 +1,27 @@
+{
+  "name": "twople",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "conrad@burningpotato.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/conartist6/twople.git"
+  },
+  "keywords": [
+    "map",
+    "sequence",
+    "seq",
+    "es6",
+    "es2015",
+    "iterable",
+    "key",
+    "value",
+    "pair",
+    "tuple",
+    "typescript"
+  ],
+  "bugs": {
+    "url": "https://github.com/conartist6/twople/issues"
+  },
+  "homepage": "https://github.com/conartist6/twople#readme"
+}
