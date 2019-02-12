@@ -8,6 +8,9 @@
     "build": "broccoli build --overwrite dist",
     "test": "jest"
   },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "devDependencies": {
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-typescript": "^7.1.0",
@@ -16,6 +19,7 @@
     "broccoli": "^2.0.1",
     "broccoli-babel-transpiler": "^7.1.2",
     "broccoli-cli": "^1.0.0",
+    "broccoli-funnel": "^2.0.2",
     "broccoli-merge-trees": "^3.0.2",
     "broccoli-rollup": "^2.1.1",
     "jest": "^24.1.0",

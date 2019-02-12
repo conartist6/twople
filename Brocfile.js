@@ -1,10 +1,18 @@
 const mergeTrees = require('broccoli-merge-trees');
+const funnel = require('broccoli-funnel');
 const esTranspiler = require('broccoli-babel-transpiler');
 const Rollup = require('broccoli-rollup');
 const babel = require('rollup-plugin-babel');
 const commonjs = require('rollup-plugin-commonjs');
 
 let es = 'src';
+
+let typedefs = new funnel('src', {
+  include: ['**/*.d.ts'],
+  getDestinationPath(relativePath) {
+    return relativePath === 'twople.d.ts' ? 'index.d.ts' : relativePath;
+  },
+});
 
 let bundledCJS = new Rollup(es, {
   rollup: {
@@ -25,4 +33,4 @@ let bundledCJS = new Rollup(es, {
   },
 });
 
-module.exports = mergeTrees([bundledCJS]);
+module.exports = mergeTrees([bundledCJS, typedefs]);
