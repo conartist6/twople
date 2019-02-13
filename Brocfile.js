@@ -16,7 +16,7 @@ let typedefs = new funnel('src', {
 
 let bundledCJS = new Rollup(es, {
   rollup: {
-    input: 'index.js',
+    input: 'cjs-bridge.js',
     output: {
       file: 'index.js',
       format: 'cjs',

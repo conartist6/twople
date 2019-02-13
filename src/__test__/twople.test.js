@@ -1,11 +1,4 @@
-import entryDefault, {
-  entry,
-  entryIterable,
-  isEntry,
-  isEntryIterable,
-  Entry,
-  EntryIterable,
-} from '../twople';
+import entryDefault, { entry, entryIterable, isEntry, isEntryIterable } from '../twople';
 
 describe('exports', () => {
   it('the default export is the twople function', () => {
@@ -45,16 +38,14 @@ describe('entryIterable', () => {
   });
 
   it('when given array entries, returns tuples', () => {
-    const aEntry = [0, 'a'];
-    const bEntry = [1, 'b'];
-    expect(Array.from(entryIterable([aEntry, bEntry]))).toEqual([
-      entry(...aEntry),
-      entry(...bEntry),
+    expect(Array.from(entryIterable([[0, 'a'], [1, 'b']]))).toEqual([
+      entry(0, 'a'),
+      entry(1, 'b'),
     ]);
   });
 
   it('reuses tuple entries when the second parameter is true', () => {
-    const entries = Array.from(entryIterable([[], []], true));
+    const entries = Array.from(entryIterable([[0, 'a'], [1, 'b']], true));
     expect(entries[0]).toBe(entries[1]);
   });
 

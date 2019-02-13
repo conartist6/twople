@@ -14,6 +14,10 @@ class EntryIterator {
       done: this._i++ >= 2,
     };
   }
+
+  [Symbol.iterator]() {
+    return this;
+  }
 }
 
 class TwopleEntry {
@@ -81,6 +85,10 @@ class TwopleEntryIterator {
     }
     this._done = true;
     return { done: true, value: undefined };
+  }
+
+  [Symbol.iterator]() {
+    return this;
   }
 }
 

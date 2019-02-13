@@ -6,7 +6,11 @@
   "license": "MIT",
   "scripts": {
     "build": "broccoli build --overwrite dist",
-    "test": "jest",
+    "build:type-tests": "cd src/__test__ && cp twople.test.js twople.test.ts",
+    "test": "run-s test:*",
+    "test:js": "jest",
+    "test:types": "run-s build:type-tests test:types:__i",
+    "test:types:__i": "tsc",
     "prepublishOnly": "run-s test build"
   },
   "main": "dist/index.js",
