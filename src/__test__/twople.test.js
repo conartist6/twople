@@ -1,4 +1,4 @@
-import entryDefault, { entry, entryIterable, isEntry, isEntryIterable } from '../twople';
+import entryDefault, { entry, entryIterable, isEntryIterable } from '../twople';
 
 describe('exports', () => {
   it('the default export is the twople function', () => {
@@ -23,10 +23,6 @@ describe('entry', () => {
 
   it('has length 2', () => {
     expect(entry()).toHaveLength(2);
-  });
-
-  it('is an entry', () => {
-    expect(isEntry(entry())).toBe(true);
   });
 });
 

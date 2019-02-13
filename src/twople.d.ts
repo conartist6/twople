@@ -14,8 +14,7 @@ declare function entryIterable<K, V>(
   reuseEntry?: boolean
 ): Iterable<Entry<K, V>>;
 
-declare function isEntry(shape: any): boolean;
 declare function isEntryIterable(shape: any): boolean;
 
-export { entry, entryIterable, isEntry, isEntryIterable };
+export { entry, entryIterable, isEntryIterable };
 export default entry;

@@ -107,10 +107,6 @@ class TwopleEntryIterable {
   }
 }
 
-export function isEntry(shape) {
-  return !!(shape && shape[Entry]);
-}
-
 export function entryIterable(iterable, reuseEntry = false) {
   return new TwopleEntryIterable(iterable, reuseEntry);
 }
