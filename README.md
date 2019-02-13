@@ -2,6 +2,9 @@
 
 Twople is a micro-library for declaring key-value pairs, which in javascript are called "entries" and are implemented as tuples (a tuple is an array of some fixed number of items, in this case two, hence the name). An entry, such as is used to constuct an es6 `Map` can be written as `[key, value]`. I will refer to this as an array entry. Twople offers an alternative, the twople entry, which mimics an array entry in every important manner but also can be reflectively differentiated from any other kind of array.
 
+[![Build Status](https://travis-ci.org/conartist6/twople.svg?branch=master)](https://travis-ci.org/conartist6/twople)
+[![npm version](https://img.shields.io/npm/v/twople.svg)](https://www.npmjs.com/package/twople)
+
 ## Why
 
 Generally there are two specific reasons why you would want to use twoples:
@@ -40,6 +43,8 @@ The result of this function is a twople entry. You can access its members just a
 
 `function entryIterable(iterable, reuseEntry = true)`
 This function should be passed an iterable of entries, which may be either array entries or twople entries. The result of this function is an iterable of twople entries. If reuseEntry is true, entryIterable will wrap every array entry it encounters in the same tuple entry. This is more efficient because internally the `Map` consturctor will make copies of entries anyway, and functions like `map` only need one at a time.
+
+The result of entryIterable is an entry iterable as defined by [structure-ish](https://github.com/conartist6/structure-ish#structure-ish)
 
 `function isEntry(shape)`
 This function returns true if shape was generated using `entry()`
