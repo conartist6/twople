@@ -2,51 +2,9 @@ import { EntryIterable, isEntryIterable } from 'structure-ish';
 
 const Entry = Symbol.for('twople.protocol.entry');
 
-class EntryIterator {
-  constructor(entry) {
-    this._i = 0;
-    this._entry = entry;
-  }
-
-  next() {
-    return {
-      value: this._entry[this._i],
-      done: this._i++ >= 2,
-    };
-  }
-
-  [Symbol.iterator]() {
-    return this;
-  }
-}
-
-class TwopleEntry {
-  constructor(key, value) {
-    this[0] = key;
-    this[1] = value;
-  }
-
-  clone() {
-    return new TwopleEntry(this[0], this[1]);
-  }
-
-  get length() {
-    return 2;
-  }
-
-  [Symbol.iterator]() {
-    return new EntryIterator(this);
-  }
-
-  [Entry]() {
-    return true;
-  }
-}
-
 class TwopleEntryIterator {
-  constructor(source, reuseEntry) {
+  constructor(source) {
     this._done = false;
-    this._entry = reuseEntry ? entry() : null;
     this._sourceIterator = source[Symbol.iterator]();
   }
 
@@ -60,20 +18,12 @@ class TwopleEntryIterator {
         return this.return();
       }
 
-      let sharedEntry;
-      let value;
-      if (item[Entry]) {
-        value = item.value;
-      } else if ((sharedEntry = this._entry)) {
-        sharedEntry[0] = item.value[0];
-        sharedEntry[1] = item.value[1];
-        value = sharedEntry;
-      } else {
-        value = entry(item.value[0], item.value[1]);
+      if (!Array.isArray(item.value) || item.value.length !== 2) {
+        throw new Error("EntryIterable must be passed an iterable of entries")
       }
 
       return {
-        value,
+        value: item.value,
         done: false,
       };
     }
@@ -112,7 +62,7 @@ export function entryIterable(iterable, reuseEntry = false) {
 }
 
 export function entry(key, value) {
-  return new TwopleEntry(key, value);
+  return [key, value];
 }
 
 export { isEntryIterable };

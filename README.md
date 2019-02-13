@@ -1,6 +1,6 @@
 # Twople
 
-Twople is a micro-library for declaring key-value pairs, which in javascript are called "entries" and are implemented as tuples (a tuple is an array of some fixed number of items, in this case two, hence the name). An entry, such as is used to constuct an es6 `Map` can be written as `[key, value]`. I will refer to this as an array entry. Twople offers an alternative, the twople entry, which mimics an array entry in every important manner but can be tracked more readily by type systems. It also offers the entry iterable construct, and iterable which guarantees that every yielded item will be an entry, and which can be reflectively identified.
+Twople is a micro-library for declaring key-value pairs, which in javascript are called "entries" and are implemented as tuples (a tuple is an array of some fixed number of items, in this case two, hence the name). An entry, such as is used to constuct an es6 `Map` can be written as `[key, value]`.
 
 [![Build Status](https://travis-ci.org/conartist6/twople.svg?branch=master)](https://travis-ci.org/conartist6/twople)
 [![npm version](https://img.shields.io/npm/v/twople.svg)](https://www.npmjs.com/package/twople)
@@ -25,7 +25,7 @@ You can fix this code using twople!
 
 ```js
 import entry from 'twople';
-const entryList = [entry('key', 'value')];
+const entryList = [entry('key1', 'value1'), entry('key2', 'value2')];
 
 new Map(entryList);
 ```
@@ -39,12 +39,10 @@ Some functions work better when they are aware of key-value pairs. For example t
 ## API
 
 `function entry(key, value)`
-The result of this function is a twople entry. You can access its members just as you would an array entry, e.g. `entry('zero', 'one')[1]` will return `'one'`. It has length `2`, and it is iterable. This function is the default export of the library, even when used in node.
+The result of this function is an entry: `[key, value]`. This function is the default export of the library, even when used in node.
 
-`function entryIterable(iterable, reuseEntry = true)`
-This function should be passed an iterable of entries, which may be either array entries or twople entries. The result of this function is an iterable of twople entries. If reuseEntry is true, entryIterable will wrap every array entry it encounters in the same tuple entry. This is more efficient because internally the `Map` consturctor will make copies of entries anyway, and functions like `map` only need one at a time.
-
-The result of entryIterable is an entry iterable as defined by [structure-ish](https://github.com/conartist6/structure-ish#structure-ish)
+`function entryIterable(iterable)`
+This function is a passthrough. It should be passed an iterable of entries and it will emit those same entries. It will throw an error if any or the items in the iterable is not an Array of size two. `isEntryIterable(entryIterable(iterable))` returns true.
 
 `function isEntryIterable(iterable)`
-This function returns true if iterable was generated using `entryIterable()`
+Returns true if every item in the iterable can safely be expected to be an entry. This function is actually a re-export from [structure-ish](https://github.com/conartist6/structure-ish#structure-ish), and is capable of detecting more types of entry iterables (Maps, for example) than just those created by the `entryIterable` function.

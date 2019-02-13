@@ -12,8 +12,8 @@ describe('entry', () => {
   });
 
   it('has 0 and 1 properties', () => {
-    expect(entry()).toEqual({ [0]: undefined, [1]: undefined });
-    expect(entry('key', 'value')).toEqual({ [0]: 'key', [1]: 'value' });
+    expect(entry()).toEqual([undefined, undefined]);
+    expect(entry('key', 'value')).toEqual(['key', 'value']);
   });
 
   it('is iterable', () => {
@@ -38,11 +38,6 @@ describe('entryIterable', () => {
       entry(0, 'a'),
       entry(1, 'b'),
     ]);
-  });
-
-  it('reuses tuple entries when the second parameter is true', () => {
-    const entries = Array.from(entryIterable([[0, 'a'], [1, 'b']], true));
-    expect(entries[0]).toBe(entries[1]);
   });
 
   it('is an entryIterable', () => {
